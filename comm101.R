@@ -26,20 +26,21 @@ salinity_plot <- ggplot(woa_sal, aes(x = salinity)) +
        y = "Frequency") +
   theme_minimal()
 
-ggsave("comm101p3.png", plot = salinity_plot, width = 8, height = 6, dpi = 300)
+salinity_plot
+
 
 # P4 Use ggplot to visualize the distribution of sea surface salinity by ocean
 # basin. Save your figure as “comm101p4.png”.
 
 woa_sal$ocean <- as.factor(woa_sal$ocean)
 
-salinity_plot <- ggplot(woa_sal, aes(x = salinity, fill = ocean)) +
-  geom_histogram(binwidth = 0.1, color = "white", alpha = 0.7) +
-  facet_wrap(~ ocean) +
-  labs(title = "Distribution of Sea Surface Salinity by Ocean Basin",
-       x = "Sea Surface Salinity",
-       y = "Frequency") +
-  theme_minimal()
+salinity_plot <- ggplot(woa_sal, aes(x = ocean, y = salinity, fill = ocean)) +
+  geom_boxplot() +
+  labs(title = "Sea Surface Salinity by Ocean Basin",
+       x = "Ocean Basin",
+       y = "Sea Surface Salinity") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set2")
 
 ggsave("comm101p4.png", plot = salinity_plot, width = 10, height = 6, dpi = 300)
 
@@ -103,4 +104,3 @@ salinity_latitude_plot <- ggplot(woa_sal, aes(x = latitude, y = salinity, color 
         strip.text = element_text(size = 14, face = "bold"))
 
 ggsave("comm101p8.png", plot = salinity_latitude_plot, width = 12, height = 6, dpi = 300)
-
